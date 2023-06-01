@@ -1,0 +1,58 @@
+.selectorHighlight {
+  background-color: #0e558b;
+  height: 300px;
+}
+
+.SearchOptions {
+  position: absolute;
+  top: 26px;
+  font-size: 48px;
+  text-align: center;
+  color: #979488;
+  width: 100%;
+  margin: 0;
+}
+.HOFNav > button {
+  font-family: 'Franklin Gothic Demi';
+  color: white;
+
+  font-size: 36px;
+  text-align: center;
+  background-color: #0e558b;
+  border: none;
+  border-radius: 5px;
+  width: 300px;
+  height: 200px;
+  position: absolute;
+  transform: translateX(-50%);
+  left: 50%;
+  padding: 1rem;
+}
+.inductYear {
+  top: 141px;
+}
+.athlete {
+  top: 426px;
+}
+.sport {
+  top: 711px;
+}
+
+.HOFNav {
+  position: absolute;
+  height: 100%;
+  width: 434px;
+  border-right: 23px solid #0e558b;
+  box-shadow: 9px -6px 26px 10px rgba(48, 59, 63, 0.21);
+}
+.SearchHOF {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 1920px;
+  height: 970px;
+  background-color: white;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
