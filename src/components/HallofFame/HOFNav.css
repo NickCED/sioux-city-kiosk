@@ -45,14 +45,3 @@
   border-right: 23px solid #0e558b;
   box-shadow: 9px -6px 26px 10px rgba(48, 59, 63, 0.21);
 }
-.SearchHOF {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 1920px;
-  height: 970px;
-  background-color: white;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-}

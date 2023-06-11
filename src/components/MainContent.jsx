@@ -1,6 +1,8 @@
 import React from 'react';
 import ImageBreakout from './Breakouts/ImageBreakout';
-import SearchHOF from './HallofFame/SearchHOF';
+import HOFNav from './HallofFame/HOFNav';
+import HOFEntries from './HallofFame/HOFEntries';
+import Home from './Home/Home';
 
 const MainContent = () => {
   const style = {
@@ -14,7 +16,9 @@ const MainContent = () => {
 
   return (
     <div style={style}>
-      <SearchHOF />
+      {/* <HOFNav /> */}
+      {/* <HOFEntries /> */}
+      <Home />
     </div>
   );
 };

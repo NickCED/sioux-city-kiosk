@@ -1,0 +1,29 @@
+::backdrop {
+  background-color: transparent;
+}
+.help-dialog {
+  border-radius: 5px;
+  border: 2px solid #c4c4c4;
+  background-color: #e1dede;
+  box-shadow: 0px 35px 25px rgba(48, 59, 63, 0.25);
+  padding: 10px;
+  font-size: 25px;
+  color: rgb(82 94 101);
+  font-family: 'Franklin Gothic Book';
+  max-width: 20vw;
+  white-space: wrap;
+}
+.close-button {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  margin: 10px;
+  cursor: pointer;
+  color: rgb(82 94 101);
+}
+
+h4 {
+  margin: 2rem;
+  margin-bottom: 3rem;
+}
