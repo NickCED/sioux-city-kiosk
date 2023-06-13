@@ -1,0 +1,38 @@
+.TitleBar {
+  position: absolute;
+  top: 970px;
+  left: 0px;
+  width: 1920px;
+  height: 110px;
+  background-color: rgba(254, 236, 209, 1);
+}
+#yellowBox {
+  position: absolute;
+  bottom: 0px;
+  right: 0px;
+  width: 380px;
+  height: 100%;
+  background-color: #f9a11b;
+  transition: all 0.5s ease-in-out;
+  display: flex;
+  align-items: center;
+  justify-content: end;
+  gap: 10px;
+}
+.yellowBoxAttract {
+  width: 380px;
+  height: 100%;
+}
+.yellowBoxHome {
+  width: 380px;
+  height: 55px;
+}
+.title {
+  font-family: 'Franklin Gothic Demi';
+  font-size: 64px;
+  color: rgba(0, 0, 0, 0.5);
+  bottom: 23px;
+  left: 41px;
+  position: absolute;
+  margin: 0;
+}

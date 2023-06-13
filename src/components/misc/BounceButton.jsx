@@ -79,9 +79,9 @@ const BounceButton = (props) => {
     if (props.onClick) {
       props.onClick(e);
     }
-    console.log(e);
+
     const yPos = _yPos;
-    console.log('ypos', yPos);
+
     if (!props.isPng) {
       const clickAnim = gsap.timeline();
       clickAnim

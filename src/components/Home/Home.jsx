@@ -1,4 +1,5 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
+import { navigationContext } from '../../App';
 import { gsap } from 'gsap';
 import PropTypes from 'prop-types';
 import Button from '../misc/Button';
@@ -22,15 +23,40 @@ Notes:
 */
 
 export default function Home(props) {
+  const { page, setPage } = useContext(navigationContext);
   const [isClosing, setIsClosing] = useState(false);
   const handleButtonClick = (e) => {
     console.log(e.target.id);
     setIsClosing(true);
-    animOut();
+    animOut(e.target.id);
   };
 
-  const animOut = () => {
-    const homeAnimOut = gsap.timeline({ delay: 0.25 });
+  const animOut = (imgClicked) => {
+    let clicked;
+    switch (imgClicked) {
+      case 'HOFImg':
+        clicked = 'HOF';
+        break;
+      case 'VenuesImg':
+        clicked = 'Venues';
+        break;
+      case 'ProfessionalSportsImg':
+        clicked = 'ProfessionalSports';
+        break;
+      case 'SchoolsImg':
+        clicked = 'Schools';
+        break;
+      default:
+        break;
+    }
+
+    const homeAnimOut = gsap.timeline({
+      delay: 0.25,
+      onComplete: () => {
+        setPage(clicked);
+        setIsClosing(false);
+      },
+    });
     homeAnimOut
       .to(['#HOF', '#Venues', '#ProfessionalSports', '#Schools'], {
         opacity: 0,
@@ -174,7 +200,7 @@ export default function Home(props) {
       <BounceButton
         id='HOF'
         style={{
-          transform: 'translate(979px, 599px)',
+          transform: 'translate(41px, 599px)',
           borderRadius: '5px',
         }}
         onClick={handleButtonClick}
@@ -184,7 +210,7 @@ export default function Home(props) {
       <BounceButton
         id='Venues'
         style={{
-          transform: 'translate(41px, 599px)',
+          transform: 'translate(979px, 599px)',
           borderRadius: '5px',
         }}
         onClick={handleButtonClick}

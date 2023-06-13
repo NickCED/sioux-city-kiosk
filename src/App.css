@@ -17,3 +17,6 @@
   pointer-events: none;
   touch-action: none;
 }
+.App {
+  overflow: hidden;
+}

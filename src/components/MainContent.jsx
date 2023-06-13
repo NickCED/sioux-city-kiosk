@@ -1,11 +1,16 @@
 import React from 'react';
+import { useState, useEffect, useContext } from 'react';
+import { navigationContext } from '../App';
+import { states } from './titleStateObj';
 import ImageBreakout from './Breakouts/ImageBreakout';
 import HOFNav from './HallofFame/HOFNav';
 import HOFEntries from './HallofFame/HOFEntries';
 import Home from './Home/Home';
 import ProfessionalMain from './ProfessionalMain/ProfessionalMain';
 
-const MainContent = () => {
+export default function MainContent(props) {
+  const { page, setPage } = useContext(navigationContext);
+  const [state, setState] = useState(states[0]); //
   const style = {
     position: 'absolute',
     top: 0,
@@ -19,10 +24,8 @@ const MainContent = () => {
     <div style={style}>
       {/* <HOFNav /> */}
       {/* <HOFEntries /> */}
-      {/* <Home /> */}
-      <ProfessionalMain />
+      {page === 'Home' && <Home />}
+      {page === 'ProfessionalSports' && <ProfessionalMain />}
     </div>
   );
-};
-
-export default MainContent;
+}
