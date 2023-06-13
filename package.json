@@ -16,13 +16,15 @@
     "react-icons": "^4.9.0",
     "react-scripts": "5.0.1",
     "react-simple-keyboard": "^3.6.10",
+    "serve": "^14.2.0",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "runBackend": "node server.js && open -a \"Google Chrome\" --args --kiosk http://localhost:3000"
   },
   "eslintConfig": {
     "extends": [

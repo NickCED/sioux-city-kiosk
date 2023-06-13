@@ -60,6 +60,14 @@ const Title = (props) => {
         <HelpButton />
         <HomeButton onClick={() => changeTitle('Home')} />
       </div>
+      <div className={styles.attractTitle}>
+        <p className={`${styles.attractTitleText}  ${styles.first}`}>
+          SIOUX CITY
+        </p>
+        <p className={`${styles.attractTitleText}  ${styles.second}`}>
+          SPORTS HISTORY
+        </p>
+      </div>
     </div>
   );
 };

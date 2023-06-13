@@ -1,0 +1,12 @@
+.attractGradient {
+  position: absolute;
+  width: 100%;
+  height: 159px;
+  bottom: 100px;
+
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0) 0%,
+    #ffffff 44.58%
+  );
+}
