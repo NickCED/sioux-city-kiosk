@@ -36,3 +36,29 @@
   position: absolute;
   margin: 0;
 }
+.attractTitle {
+  transition: all 0.5s ease-in-out;
+  position: absolute;
+  width: 1540px;
+  height: 132px;
+  left: 0px;
+  bottom: 0px;
+  background: #0e558b;
+}
+.attractTitleText {
+  margin: 0;
+  font-family: 'Franklin Gothic Demi';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 100px;
+  line-height: 113px;
+  display: flex;
+  align-items: center;
+  text-shadow: 1px 2px 8px rgba(0, 0, 0, 0.25);
+}
+.first {
+  color: #d8dcdb;
+}
+.second {
+  color: #aadeff;
+}
