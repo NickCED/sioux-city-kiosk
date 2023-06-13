@@ -25,25 +25,45 @@ const BounceButton = (props) => {
   const buttonRef = useRef();
   const [yPos, setYPos] = useState(() => {
     if (props.style) {
-      return props.style.transform.split(',')[1].split('px')[0];
+      const y = props.style.transform
+        ? props.style.transform.split(',')[1].split('px')[0]
+        : 0;
+      return y;
     }
+    return 0;
   });
 
   const [isActive, setIsActive] = useState(false);
   const [style, setStyle] = useState(() => {
-    if (props.style) {
-      const frameLessStyle = {
-        ...props.style,
+    let frameLessStyle = {
+      border: 'none',
+      background: 'none',
+      padding: 0,
+      overflow: 'hidden',
+    };
 
-        border: 'none',
-        background: 'none',
-        padding: 0,
-        overflow: 'hidden',
+    if (props.style) {
+      frameLessStyle = {
+        ...frameLessStyle,
+        ...props.style,
+        position: 'absolute',
+      };
+    }
+    if (props.isPng) {
+      frameLessStyle = {
+        ...frameLessStyle,
+
+        filter: 'drop-shadow(0px 10px 8px rgba(0, 0, 0, 0.25)) ',
+      };
+    } else {
+      frameLessStyle = {
+        ...frameLessStyle,
+        borderRadius: '5px',
         boxShadow:
           '0px 4px 4px rgba(0, 0, 0, 0.25), 0px 21px 18px -4px rgba(0, 0, 0, 0.25), inset 0px -6px 74px -16px #303B3F',
       };
-      return frameLessStyle;
     }
+    return frameLessStyle;
   });
 
   useLayoutEffect(() => {
@@ -55,28 +75,62 @@ const BounceButton = (props) => {
     setStyle(updatedStyle);
   }, [imgLoaded]);
 
-  const handleClick = (e) => {
+  const handleClick = (e, _yPos) => {
     if (props.onClick) {
       props.onClick(e);
     }
-    gsap.fromTo(
-      buttonRef.current,
-      {
-        y: yPos,
-        boxShadow:
-          '0px 4px 4px rgba(0, 0, 0, 0.25), 0px 21px 18px -4px rgba(0, 0, 0, 0.25), inset 0px -6px 74px -16px #303B3F',
-        scale: 1,
-      },
-      {
-        y: '+=10',
-        boxShadow:
-          '0px 4px 4px rgba(0, 0, 0, 0.25), 0px 0px 18px -4px rgba(0, 0, 0, 0.25), inset 0px -6px 74px -16px #303B3F',
-        scale: 0.99,
-        duration: 0.1,
-        repeat: 1,
-        yoyo: true,
-      }
-    );
+    console.log(e);
+    const yPos = _yPos;
+    console.log('ypos', yPos);
+    if (!props.isPng) {
+      const clickAnim = gsap.timeline();
+      clickAnim
+        .fromTo(
+          buttonRef.current,
+          {
+            y: yPos,
+            boxShadow:
+              '0px 4px 4px rgba(0, 0, 0, 0.25), 0px 21px 18px -4px rgba(0, 0, 0, 0.25), inset 0px -6px 74px -16px #303B3F',
+            scale: 1,
+          },
+          {
+            y: '+=10',
+            boxShadow:
+              '0px 4px 4px rgba(0, 0, 0, 0.25), 0px 0px 18px -4px rgba(0, 0, 0, 0.25), inset 0px -6px 74px -16px #303B3F',
+            scale: 0.99,
+            duration: 0.1,
+          }
+        )
+        .to(
+          buttonRef.current,
+          {
+            y: yPos,
+            boxShadow:
+              '0px 4px 4px rgba(0, 0, 0, 0.25), 0px 21px 18px -4px rgba(0, 0, 0, 0.25), inset 0px -6px 74px -16px #303B3F',
+            scale: 1,
+            duration: 0.1,
+          },
+          '>'
+        );
+    }
+    if (props.isPng) {
+      gsap.fromTo(
+        buttonRef.current,
+        {
+          y: yPos,
+          filter: 'drop-shadow(0px 10px 8px rgba(0, 0, 0, 0.25)) ',
+          scale: 1,
+        },
+        {
+          y: '+=10',
+          filter: 'drop-shadow(0px 0px 4px rgba(0, 0, 0, 0.25)) ',
+          scale: 0.99,
+          duration: 0.1,
+          repeat: 1,
+          yoyo: true,
+        }
+      );
+    }
   };
 
   return (
@@ -84,8 +138,8 @@ const BounceButton = (props) => {
       id={imageId}
       ref={buttonRef}
       style={style}
-      className='button'
-      onClick={handleClick}
+      className={props.className ? props.className + ' button' : 'button'}
+      onClick={(e) => handleClick(e, yPos)}
       aria-pressed={isActive}
     >
       <img

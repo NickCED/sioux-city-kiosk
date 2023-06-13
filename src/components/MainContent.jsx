@@ -3,6 +3,7 @@ import ImageBreakout from './Breakouts/ImageBreakout';
 import HOFNav from './HallofFame/HOFNav';
 import HOFEntries from './HallofFame/HOFEntries';
 import Home from './Home/Home';
+import ProfessionalMain from './ProfessionalMain/ProfessionalMain';
 
 const MainContent = () => {
   const style = {
@@ -18,7 +19,8 @@ const MainContent = () => {
     <div style={style}>
       {/* <HOFNav /> */}
       {/* <HOFEntries /> */}
-      <Home />
+      {/* <Home /> */}
+      <ProfessionalMain />
     </div>
   );
 };

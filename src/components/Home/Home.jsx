@@ -25,6 +25,7 @@ export default function Home(props) {
   const [isClosing, setIsClosing] = useState(false);
   const handleButtonClick = (e) => {
     console.log(e.target.id);
+    setIsClosing(true);
     animOut();
   };
 
@@ -163,7 +164,6 @@ export default function Home(props) {
       <BounceButton
         id='ProfessionalSports'
         style={{
-          position: 'absolute',
           transform: 'translate(41px, 220px)',
           borderRadius: '5px',
         }}
@@ -174,7 +174,6 @@ export default function Home(props) {
       <BounceButton
         id='HOF'
         style={{
-          position: 'absolute',
           transform: 'translate(979px, 599px)',
           borderRadius: '5px',
         }}
@@ -185,7 +184,6 @@ export default function Home(props) {
       <BounceButton
         id='Venues'
         style={{
-          position: 'absolute',
           transform: 'translate(41px, 599px)',
           borderRadius: '5px',
         }}
@@ -196,7 +194,6 @@ export default function Home(props) {
       <BounceButton
         id='Schools'
         style={{
-          position: 'absolute',
           transform: 'translate(979px, 220px)',
           borderRadius: '5px',
         }}

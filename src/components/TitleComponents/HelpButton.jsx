@@ -1,11 +1,15 @@
-import { useRef, useLayoutEffect } from 'react';
+import { useRef, useLayoutEffect, useState } from 'react';
 import { gsap } from 'gsap';
+import { CSSRulePlugin } from 'gsap/all';
+
 import PropTypes from 'prop-types';
 import Button from '../misc/Button';
 import active from './assets/Help_active.png';
 import inactive from './assets/Help_inactive.png';
 import { IoCloseCircle } from 'react-icons/io5';
-import './HelpButton.css';
+import styles from './HelpButton.module.css';
+
+gsap.registerPlugin(CSSRulePlugin);
 
 HelpButton.propTypes = {
   onClick: PropTypes.func,
@@ -13,8 +17,10 @@ HelpButton.propTypes = {
 
 export default function HelpButton(props) {
   const helpDialog = useRef();
+  const [isOn, setIsOn] = useState(false);
   const handleHelpClick = (e) => {
     helpDialog.current.showModal();
+    setIsOn(true);
     gsap.fromTo(
       helpDialog.current,
       { opacity: 0 },
@@ -42,6 +48,7 @@ export default function HelpButton(props) {
   };
 
   const closeHelp = () => {
+    setIsOn(false);
     gsap.fromTo(
       helpDialog.current,
       { opacity: 1 },
@@ -55,18 +62,26 @@ export default function HelpButton(props) {
   };
 
   return (
-    <div className='help'>
+    <div className={styles.help}>
       <Button
-        style={{
-          position: 'absolute',
-        }}
         activeImage={active}
         defaultImage={inactive}
+        style={{
+          position: 'unset',
+        }}
         altText='Help'
         onClick={handleHelpClick}
       />
-      <dialog className='help-dialog' onClick={clickModal} ref={helpDialog}>
-        <IoCloseCircle className='close-button' onClick={closeHelp} size={30} />
+      <dialog
+        className={`${styles.helpDialog}${isOn ? ` ${styles.on}` : ''}`}
+        onClick={clickModal}
+        ref={helpDialog}
+      >
+        <IoCloseCircle
+          className={styles.closeButton}
+          onClick={closeHelp}
+          size={30}
+        />
 
         <h4>
           Search by the different categories, or scroll and tap to explore
