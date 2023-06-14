@@ -6,3 +6,14 @@
 .background {
   position: absolute;
 }
+
+#comingSoon {
+  position: absolute;
+
+  transform: translate(170%, -50%);
+  color: white;
+  font-size: 7rem;
+  font-weight: bold;
+  z-index: 8;
+  font-family: 'Franklin Gothic Book';
+}

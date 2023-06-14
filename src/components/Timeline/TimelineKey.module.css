@@ -1,0 +1,67 @@
+.auto {
+  background-color: #cdadb8;
+}
+.baseball {
+  background-color: #735f83;
+}
+.basketball {
+  background-color: #ffd181;
+}
+.football {
+  background-color: #81a9c3;
+}
+.horse {
+  background-color: #8a8f92;
+}
+.hockey {
+  background-color: #276697;
+}
+.soccer {
+  background-color: #a34f61;
+}
+.softball {
+  background-color: #a78871;
+}
+
+.keyCont > div {
+  width: 350px;
+  height: 51px;
+  border-radius: 5px;
+  text-align: left;
+  line-height: 51px;
+  font-family: 'Franklin Gothic Demi';
+  font-size: 30px;
+  color: white;
+  padding-left: 1rem;
+}
+.keyCont {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  gap: 55px;
+  margin-top: 20px;
+}
+.keyTitle {
+  font-family: 'Franklin Gothic Demi';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 48px;
+  line-height: 100px;
+  text-align: center;
+
+  color: #979488;
+}
+.TimelineKey {
+  box-sizing: border-box;
+
+  position: absolute;
+  width: 434px;
+  height: 970px;
+  left: 0px;
+  top: 0px;
+
+  background: #ffffff;
+  border-right: 23px solid #81a9c3;
+  box-shadow: 9px -6px 26px 10px rgba(48, 59, 63, 0.21);
+}

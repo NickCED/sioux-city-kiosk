@@ -10,22 +10,28 @@
   position: absolute;
   bottom: 0px;
   right: 0px;
-  width: 380px;
-  height: 100%;
-  background-color: #f9a11b;
-  transition: all 0.5s ease-in-out;
+
+  transition: all 0.75s ease-in-out 0.55s;
   display: flex;
   align-items: center;
   justify-content: end;
   gap: 10px;
 }
-.yellowBoxAttract {
-  width: 380px;
+.Attract {
+  background-color: #f9a11b;
+  min-width: 380px;
+  width: fit-content;
   height: 100%;
 }
-.yellowBoxHome {
+.Home {
   width: 380px;
-  height: 55px;
+  height: 60%;
+  background-color: #f9a01b73;
+}
+.Pages {
+  background-color: #f9a11b;
+  width: 380px;
+  height: 90%;
 }
 .title {
   font-family: 'Franklin Gothic Demi';
@@ -37,13 +43,14 @@
   margin: 0;
 }
 .attractTitle {
-  transition: all 0.5s ease-in-out;
+  transition: all 0.75s ease-in-out;
   position: absolute;
   width: 1540px;
   height: 132px;
   left: 0px;
   bottom: 0px;
   background: #0e558b;
+  display: flex;
 }
 .attractTitleText {
   margin: 0;
@@ -58,7 +65,9 @@
 }
 .first {
   color: #d8dcdb;
+  margin-left: 2rem;
 }
 .second {
   color: #aadeff;
+  margin-left: 2rem;
 }

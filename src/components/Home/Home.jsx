@@ -25,26 +25,27 @@ Notes:
 export default function Home(props) {
   const { page, setPage } = useContext(navigationContext);
   const [isClosing, setIsClosing] = useState(false);
+
   const handleButtonClick = (e) => {
-    console.log(e.target.id);
-    setIsClosing(true);
-    animOut(e.target.id);
+    // console.log(e.target.id);
+    // setIsClosing(true);
+    // animOut(e.target.id);
   };
 
   const animOut = (imgClicked) => {
     let clicked;
     switch (imgClicked) {
-      case 'HOFImg':
-        clicked = 'HOF';
+      case 'HOF':
+        clicked = 'HOFSearch';
         break;
-      case 'VenuesImg':
-        clicked = 'Venues';
+      case 'Venues':
+        clicked = 'VenuesSearch';
         break;
-      case 'ProfessionalSportsImg':
-        clicked = 'ProfessionalSports';
+      case 'ProfessionalSports':
+        clicked = 'ProfessionalSportsMain';
         break;
-      case 'SchoolsImg':
-        clicked = 'Schools';
+      case 'Schools':
+        clicked = 'SchoolsMain';
         break;
       default:
         break;
@@ -53,15 +54,24 @@ export default function Home(props) {
     const homeAnimOut = gsap.timeline({
       delay: 0.25,
       onComplete: () => {
+        console.log('page changed', clicked);
         setPage(clicked);
         setIsClosing(false);
       },
     });
     homeAnimOut
-      .to(['#HOF', '#Venues', '#ProfessionalSports', '#Schools'], {
-        opacity: 0,
-        duration: 0.5,
-      })
+      .to(
+        [
+          '#HOFButton',
+          '#VenuesButton',
+          '#ProfessionalSportsButton',
+          '#SchoolsButton',
+        ],
+        {
+          opacity: 0,
+          duration: 0.5,
+        }
+      )
       .to(
         ['#v1', '#v2', '#v3', '#h4', '#h5'],
         {
@@ -128,9 +138,17 @@ export default function Home(props) {
       width: 0,
     });
 
-    gsap.set(['#HOF', '#Venues', '#ProfessionalSports', '#Schools'], {
-      opacity: 0,
-    });
+    gsap.set(
+      [
+        '#HOFButton',
+        '#VenuesButton',
+        '#ProfessionalSportsButton',
+        '#SchoolsButton',
+      ],
+      {
+        opacity: 0,
+      }
+    );
     const homeAnimIn = gsap.timeline();
     homeAnimIn
       .fromTo(
@@ -171,7 +189,12 @@ export default function Home(props) {
         '>'
       )
       .fromTo(
-        ['#ProfessionalSports', '#Schools', '#Venues', '#HOF'],
+        [
+          '#ProfessionalSportsButton',
+          '#SchoolsButton',
+          '#VenuesButton',
+          '#HOFButton',
+        ],
         { opacity: 0 },
         { opacity: 1, duration: 0.75, ease: 'sine.inOut', stagger: 0.25 },
         '>-1.25'
@@ -227,6 +250,7 @@ export default function Home(props) {
         defaultImage={Schools}
         altText='High School & Young Athletes Button'
       />
+      <p id='comingSoon'>Coming Soon...</p>
     </div>
   );
 }

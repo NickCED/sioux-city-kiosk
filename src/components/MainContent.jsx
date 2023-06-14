@@ -2,11 +2,13 @@ import React from 'react';
 import { useState, useEffect, useContext } from 'react';
 import { navigationContext } from '../App';
 import { states } from './titleStateObj';
+import Attract from './Attract/Attract';
 import ImageBreakout from './Breakouts/ImageBreakout';
 import HOFNav from './HallofFame/HOFNav';
 import HOFEntries from './HallofFame/HOFEntries';
 import Home from './Home/Home';
 import ProfessionalMain from './ProfessionalMain/ProfessionalMain';
+import ProfessionalSportsTimeline from './Timeline/ProfessionalSportsTimeline';
 
 export default function MainContent(props) {
   const { page, setPage } = useContext(navigationContext);
@@ -24,8 +26,10 @@ export default function MainContent(props) {
     <div style={style}>
       {/* <HOFNav /> */}
       {/* <HOFEntries /> */}
+      {page === 'Attract' && <Attract />}
       {page === 'Home' && <Home />}
-      {page === 'ProfessionalSports' && <ProfessionalMain />}
+      {page === 'ProfessionalSportsMain' && <ProfessionalMain />}
+      {page === 'ProfessionalSportsTimeline' && <ProfessionalSportsTimeline />}
     </div>
   );
 }

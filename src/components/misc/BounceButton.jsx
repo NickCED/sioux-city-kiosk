@@ -135,7 +135,7 @@ const BounceButton = (props) => {
 
   return (
     <button
-      id={imageId}
+      id={imageId + 'Button'}
       ref={buttonRef}
       style={style}
       className={props.className ? props.className + ' button' : 'button'}
@@ -143,7 +143,7 @@ const BounceButton = (props) => {
       aria-pressed={isActive}
     >
       <img
-        id={imageId + 'Img'}
+        id={imageId}
         ref={imgRef}
         src={props.defaultImage}
         alt={props.altText}

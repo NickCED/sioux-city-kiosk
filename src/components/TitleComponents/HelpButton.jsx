@@ -62,7 +62,7 @@ export default function HelpButton(props) {
   };
 
   return (
-    <div className={styles.help}>
+    <div id={props.id} className={styles.help}>
       <Button
         activeImage={active}
         defaultImage={inactive}
@@ -82,10 +82,20 @@ export default function HelpButton(props) {
           onClick={closeHelp}
           size={30}
         />
-
+        <h2>Sioux City Public Museum Sports History Database</h2>
+        <h3 className={styles.comingSoon}>
+          This kiosk is currently under construction and is expected to be
+          completed by the end of June.
+        </h3>
         <h4>
-          Search by the different categories, or scroll and tap to explore
+          This database will contain information on athletes, teams, and venues
+          from Sioux City’s rich sports history.
         </h4>
+
+        <h5>
+          If you have any questions or comments, please contact the Sioux City
+          Public Museum at 712-279-6174 or by email at
+        </h5>
       </dialog>
     </div>
   );

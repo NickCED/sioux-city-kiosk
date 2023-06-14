@@ -1,4 +1,10 @@
-import { useState, useLayoutEffect, useRef, useContext } from 'react';
+import {
+  useState,
+  useLayoutEffect,
+  useRef,
+  useContext,
+  useEffect,
+} from 'react';
 import { gsap } from 'gsap';
 import PropTypes from 'prop-types';
 import Button from '../misc/Button';
@@ -9,10 +15,13 @@ import HomeButton from './HomeButton';
 import { WordSplitAnim } from '../functions/WordSplitAnim';
 import { navigationContext } from '../../App';
 
-const Title = (props) => {
+export default function Title(props) {
   const { page, setPage } = useContext(navigationContext);
   const [title, setTitle] = useState('');
   const titleRef = useRef(null);
+  const [currentPage, setCurrentPage] = useState('Attract');
+  const attractTitleRef = useRef(null);
+  const helpRef = useRef(null);
 
   useLayoutEffect(() => {
     gsap.fromTo(
@@ -27,13 +36,45 @@ const Title = (props) => {
     );
   }, []);
 
-  const changeTitle = (state) => {
+  const handleHomeClick = (e) => {
+    setPage('Home');
+  };
+
+  const changeTitle = (page) => {
+    if (page === currentPage) return;
+    if (page === 'Attract') {
+      console.log('attracttitle');
+      gsap.set(attractTitleRef.current, { y: 0 });
+    } else {
+      gsap.set(attractTitleRef.current, { y: 132 });
+    }
+
+    if (page === 'Home') {
+      setYellowBoxState('Home');
+      gsap.to('#helpButtonCont', {
+        duration: 0.5,
+        delay: 0.75,
+        scale: 0.8,
+        ease: 'power1.inOut',
+      });
+    } else if (page === 'Attract') {
+      setYellowBoxState('Attract');
+    } else {
+      gsap.to('#helpButtonCont', {
+        duration: 0.5,
+        delay: 0.75,
+        scale: 0.8,
+        ease: 'power1.inOut',
+      });
+      setYellowBoxState('Pages');
+    }
+
     gsap.to(titleRef.current, {
       duration: 0.5,
       y: 150,
       ease: 'power1.inOut',
       onComplete: () => {
-        setTitle(stateObj[state].title);
+        setTitle(stateObj[page].title);
         gsap.to(titleRef.current, {
           duration: 0.5,
           y: 0,
@@ -41,9 +82,12 @@ const Title = (props) => {
         });
       },
     });
-
-    setPage(state);
+    setCurrentPage(page);
   };
+
+  useEffect(() => {
+    changeTitle(page);
+  }, [page]);
 
   const [yellowBoxState, setYellowBoxState] = useState('Attract');
   const [titleState, setTitleState] = useState(states[0]);
@@ -55,12 +99,16 @@ const Title = (props) => {
       </div>
       <div
         id={styles.yellowBox}
-        className={`styles.yellowBox${yellowBoxState}`}
+        className={`${styles.yellowBox} ${styles[yellowBoxState]}`}
       >
-        <HelpButton />
-        <HomeButton onClick={() => changeTitle('Home')} />
+        {page !== 'Attract' && <HelpButton id='helpButtonCont' />}
+        {page !== 'Home' ? (
+          page !== 'Attract' ? (
+            <HomeButton onClick={handleHomeClick} />
+          ) : null
+        ) : null}
       </div>
-      <div className={styles.attractTitle}>
+      <div ref={attractTitleRef} className={styles.attractTitle}>
         <p className={`${styles.attractTitleText}  ${styles.first}`}>
           SIOUX CITY
         </p>
@@ -70,6 +118,4 @@ const Title = (props) => {
       </div>
     </div>
   );
-};
-
-export default Title;
+}

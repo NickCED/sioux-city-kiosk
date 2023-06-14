@@ -1,7 +1,14 @@
-import { useState, useRef, useEffect, useLayoutEffect } from 'react';
+import {
+  useState,
+  useRef,
+  useEffect,
+  useLayoutEffect,
+  useContext,
+} from 'react';
 import { gsap } from 'gsap';
 import { Draggable } from 'gsap/all';
 import { InertiaPlugin } from 'gsap/dist/InertiaPlugin';
+import { navigationContext } from '../../App';
 
 import BounceButton from '../misc/BounceButton';
 import auto from './assets/automobile.png';
@@ -22,10 +29,37 @@ import './ProfessionalMain.css';
 gsap.registerPlugin(Draggable, InertiaPlugin);
 
 export default function ProfessionalMain(props) {
+  const { page, setPage } = useContext(navigationContext);
+
   const [isClosing, setIsClosing] = useState(false);
   const scrollObj = useRef();
   const handleButtonClick = (e) => {
     console.log(e.target.id);
+    switch (e.target.id) {
+      case 'automobile':
+        break;
+      case 'baseball':
+        break;
+      case 'basketball':
+        break;
+      case 'boat':
+        break;
+      case 'country':
+        break;
+      case 'hockey':
+        break;
+      case 'horseracing':
+        break;
+      case 'soccer':
+        break;
+      case 'softball':
+        break;
+      case 'timeline':
+        setPage('ProfessionalSportsTimeline');
+        break;
+      default:
+        break;
+    }
   };
   useEffect(() => {
     const scrollable = scrollObj.current;
