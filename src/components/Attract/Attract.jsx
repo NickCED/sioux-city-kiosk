@@ -1,12 +1,14 @@
-import {
+import React, {
   useEffect,
   useState,
   useContext,
   useRef,
   useLayoutEffect,
+  createRef,
 } from 'react';
 import { navigationContext } from '../../App';
 import { gsap } from 'gsap';
+import { CustomEase } from 'gsap/CustomEase';
 import cowboys from './TempAttract/1ef87bc2-a8aa-4480-bc0e-5f6a87df6af2.jfif';
 import FMorganTaylor from './TempAttract/FMorganTaylor.jfif';
 import Gateway from './TempAttract/Gateway2000Soos.jfif';
@@ -23,62 +25,9 @@ import StockYardsPark from './TempAttract/StockYardsPark.jfif';
 
 import styles from './Attract.module.css';
 gsap.registerPlugin();
+gsap.registerPlugin(CustomEase);
 
 export default function Attract(props) {
-  const tempAttractObj = {
-    1: {
-      img: cowboys,
-      title: '1934 Sioux City Cowboys',
-    },
-    2: {
-      img: FMorganTaylor,
-      title: 'F. Morgan Taylor',
-    },
-    3: {
-      img: Gateway,
-      title: 'Gateway 2000 Soos',
-    },
-    4: {
-      img: GeorgeHowardLambert,
-      title: 'George Howard Lambert',
-    },
-    5: {
-      img: LaurenLeftyBarnes,
-      title: 'Lauren "Lefty" Barnes',
-    },
-    6: {
-      img: SiouxCityBreeze,
-      title: 'Sioux City Breeze',
-    },
-    7: {
-      img: SiouxCityCountryClub,
-      title: 'Sioux City Country Club',
-    },
-    8: {
-      img: SiouxCityMusketeers,
-      title: 'Sioux City Musketeers',
-    },
-    9: {
-      img: SiouxCityRedbirds,
-      title: 'Sioux City Redbirds',
-    },
-    10: {
-      img: SiouxCitySpeedway,
-      title: 'Sioux City Speedway',
-    },
-    11: {
-      img: SueJonesBerens,
-      title: 'Sue Jones Berens',
-    },
-    12: {
-      img: SoosPark,
-      title: 'Soos Park',
-    },
-    13: {
-      img: StockYardsPark,
-      title: 'Stock Yards Park',
-    },
-  };
   const colors = [
     '#81A9C3',
     '#845577',
@@ -90,46 +39,8 @@ export default function Attract(props) {
   ];
   const AttractRef = useRef(null);
   const AttractSequenceContRef = useRef(null);
-  const cowboysBoxRef = useRef(null);
-  const cowboysRef = useRef(null);
-  const cowboysTextRef = useRef(null);
-  const FMorganTaylorBoxRef = useRef(null);
-  const FMorganTaylorRef = useRef(null);
-  const FMorganTaylorTextRef = useRef(null);
-  const GatewayboxRef = useRef(null);
-  const GatewayRef = useRef(null);
-  const GatewayTextRef = useRef(null);
-  const GeorgeHowardLambertBoxRef = useRef(null);
-  const GeorgeHowardLambertRef = useRef(null);
-  const GeorgeHowardLambertTextRef = useRef(null);
-  const LaurenLeftyBarnesBoxRef = useRef(null);
-  const LaurenLeftyBarnesRef = useRef(null);
-  const LaurenLeftyBarnesTextRef = useRef(null);
-  const SiouxCityBreezeBoxRef = useRef(null);
-  const SiouxCityBreezeRef = useRef(null);
-  const SiouxCityBreezeTextRef = useRef(null);
-  const SiouxCityCountryClubBoxRef = useRef(null);
-  const SiouxCityCountryClubRef = useRef(null);
-  const SiouxCityCountryClubTextRef = useRef(null);
-  const SiouxCityMusketeersBoxRef = useRef(null);
-  const SiouxCityMusketeersRef = useRef(null);
-  const SiouxCityMusketeersTextRef = useRef(null);
-  const SiouxCityRedbirdsBoxRef = useRef(null);
-  const SiouxCityRedbirdsRef = useRef(null);
-  const SiouxCityRedbirdsTextRef = useRef(null);
-  const SiouxCitySpeedwayBoxRef = useRef(null);
-  const SiouxCitySpeedwayRef = useRef(null);
-  const SiouxCitySpeedwayTextRef = useRef(null);
-  const SueJonesBerensBoxRef = useRef(null);
-  const SueJonesBerensRef = useRef(null);
-  const SueJonesBerensTextRef = useRef(null);
-  const SoosParkBoxRef = useRef(null);
-  const SoosParkRef = useRef(null);
-  const SoosParkTextRef = useRef(null);
-  const StockYardsParkBoxRef = useRef(null);
-  const StockYardsParkRef = useRef(null);
-  const StockYardsParkTextRef = useRef(null);
-  const SlideDuration = 2;
+
+  const SlideDuration = 11;
   let slideObj = {};
 
   // Function to get random color from array
@@ -137,7 +48,7 @@ export default function Attract(props) {
     colors[Math.floor(Math.random() * colors.length)];
 
   // Function to get random number between 650 and 800
-  const getRandomHeight = () => Math.floor(Math.random() * (800 - 650) + 650);
+  const getRandomHeight = () => Math.floor(Math.random() * (800 - 750) + 750);
 
   // Function to randomize array elements (Fisher-Yates algorithm)
   function shuffleArray(array) {
@@ -149,166 +60,93 @@ export default function Attract(props) {
   }
 
   function animateObjects() {
-    // Randomize the order of the keys
-    const keys = Object.keys(slideObj);
-    const randomKeys = shuffleArray(keys);
-
-    // Create a master timeline
-    const masterTimeline = gsap.timeline();
-
-    // Loop through each randomized key
-    randomKeys.forEach((key, index) => {
-      console.log(key);
-      let slide = slideObj[key];
-
-      // Set dimensions and position
-      console.log(slide.img);
-      let slideRect;
-      if (slide.img && slide.img instanceof Element) {
-        slideRect = slide.img.getBoundingClientRect();
-      }
-      let slideWidth = slideRect.width;
-      slide.box.style.width = `${slideWidth + 40}px`;
-      slide.box.style.backgroundColor = getRandomColor();
-      let boxHeight = getRandomHeight();
-      slide.box.style.height = `${boxHeight}px`;
-      slide.text.style.bottom = `${1080 - boxHeight + 1}rem`;
-
-      // GSAP animation
-      let timeline = gsap.timeline();
-
-      // Slide in from offscreen right to center screen
-
-      timeline.fromTo(
-        slide.box,
-        { x: 2000 },
-        {
-          x: 860 - slideWidth / 2,
-          duration: SlideDuration,
-          ease: 'power2.out',
-        }
+    // Make sure refs are ready
+    if (
+      AttractBoxRefs.current &&
+      AttractImageRefs.current &&
+      AttractTextRefs.current
+    ) {
+      // Use the shuffleArray function to randomize the order of the array indices
+      const indices = Array.from(
+        { length: AttractBoxRefs.current.length },
+        (_, i) => i
       );
-      timeline.fromTo(
-        slide.img,
-        { x: 2000 },
-        {
-          x: 960 - slideWidth / 2,
-          duration: SlideDuration,
-          ease: 'power3.out',
-        },
-        0
-      ); // animate at the same time as box
-      timeline.fromTo(
-        slide.text,
-        { x: 2000 },
-        {
-          x: 880 - slideWidth / 2,
-          duration: SlideDuration,
-          ease: 'power2.out',
-        },
-        0
-      ); // animate at the same time as box
+      const randomIndices = shuffleArray(indices);
 
-      // Then animate off screen left in a parallax style
-      timeline.to(
-        slide.box,
-        { x: -2000, duration: SlideDuration, ease: 'power2.in' },
-        '>+.25'
-      );
-      timeline.to(
-        slide.img,
-        { x: -2000, duration: SlideDuration, ease: 'power2.in' },
-        '<'
-      ); // move faster for parallax effect
-      timeline.to(
-        slide.text,
-        { x: -2000, duration: SlideDuration, ease: 'power2.in' },
-        '<'
-      ); // move slower for parallax effect
+      // Create a master timeline
+      const masterTimeline = gsap.timeline({
+        repeat: -1,
+      });
 
-      // Add this animation to the master timeline, with a stagger
-      masterTimeline.add(timeline, `>${SlideDuration - 0.25}`);
-    });
+      // Loop through each randomized index
+      randomIndices.forEach((index) => {
+        // Get the corresponding elements from each ref array
+        const box = AttractBoxRefs.current[index];
+        const img = AttractImageRefs.current[index];
+        const text = AttractTextRefs.current[index];
 
-    // Start the master animation
-    masterTimeline.play();
+        // Set dimensions and position
+        const slideWidth = img.getBoundingClientRect().width;
+        const textWidth = text.getBoundingClientRect().width;
+        box.style.backgroundColor = getRandomColor();
+        let boxHeight = getRandomHeight();
+        box.style.height = `${boxHeight}px`;
+        text.style.bottom = `${1080 - boxHeight - 150}px`;
+
+        // GSAP animation
+        let timeline = gsap.timeline();
+        CustomEase.create(
+          'custom',
+          'M0,0,C0.048,0,0.077,0.384,0.226,0.448,0.376,0.512,0.654,0.5,0.772,0.548,0.89,0.596,0.95,1,1,1'
+        );
+        CustomEase.create(
+          'custom3',
+          'M0,0,C0.048,0,0.107,0.396,0.256,0.46,0.406,0.524,0.618,0.5,0.736,0.548,0.854,0.596,0.95,1,1,1'
+        );
+        // Slide in from offscreen right to center screen
+        timeline.fromTo(
+          box,
+          { x: 2000 },
+          {
+            x: -slideWidth - 200,
+            duration: SlideDuration,
+            ease: 'custom3',
+          },
+          0.2
+        );
+        timeline.fromTo(
+          img,
+          { x: 1980 },
+          {
+            x: -slideWidth - 80,
+            duration: SlideDuration,
+            ease: 'custom3',
+          },
+          0.5
+        );
+        timeline.fromTo(
+          text,
+          { x: 1945 },
+          {
+            x: -textWidth - 100,
+            duration: SlideDuration + 0.35,
+            ease: 'custom3',
+          },
+          0.35
+        );
+
+        masterTimeline.add(timeline, `>-1.75`);
+      });
+
+      // Start the master animation
+      masterTimeline.play();
+    }
   }
-
   useEffect(() => {
-    // timer to start animation
-
-    slideObj = {
-      cowboys: {
-        box: cowboysBoxRef.current,
-        img: cowboysRef.current,
-        text: cowboysTextRef.current,
-      },
-      FMorganTaylor: {
-        box: FMorganTaylorBoxRef.current,
-        img: FMorganTaylorRef.current,
-        text: FMorganTaylorTextRef.current,
-      },
-      Gateway: {
-        box: GatewayboxRef.current,
-        img: GatewayRef.current,
-        text: GatewayTextRef.current,
-      },
-      GeorgeHowardLambert: {
-        box: GeorgeHowardLambertBoxRef.current,
-        img: GeorgeHowardLambertRef.current,
-        text: GeorgeHowardLambertTextRef.current,
-      },
-      LaurenLeftyBarnes: {
-        box: LaurenLeftyBarnesBoxRef.current,
-        img: LaurenLeftyBarnesRef.current,
-        text: LaurenLeftyBarnesTextRef.current,
-      },
-      SiouxCityBreeze: {
-        box: SiouxCityBreezeBoxRef.current,
-        img: SiouxCityBreezeRef.current,
-        text: SiouxCityBreezeTextRef.current,
-      },
-      SiouxCityCountryClub: {
-        box: SiouxCityCountryClubBoxRef.current,
-        img: SiouxCityCountryClubRef.current,
-        text: SiouxCityCountryClubTextRef.current,
-      },
-      SiouxCityMusketeers: {
-        box: SiouxCityMusketeersBoxRef.current,
-        img: SiouxCityMusketeersRef.current,
-        text: SiouxCityMusketeersTextRef.current,
-      },
-      SiouxCityRedbirds: {
-        box: SiouxCityRedbirdsBoxRef.current,
-        img: SiouxCityRedbirdsRef.current,
-        text: SiouxCityRedbirdsTextRef.current,
-      },
-      SiouxCitySpeedway: {
-        box: SiouxCitySpeedwayBoxRef.current,
-        img: SiouxCitySpeedwayRef.current,
-        text: SiouxCitySpeedwayTextRef.current,
-      },
-      SueJonesBerens: {
-        box: SueJonesBerensBoxRef.current,
-        img: SueJonesBerensRef.current,
-        text: SueJonesBerensTextRef.current,
-      },
-      SoosPark: {
-        box: SoosParkBoxRef.current,
-        img: SoosParkRef.current,
-        text: SoosParkTextRef.current,
-      },
-      StockYardsPark: {
-        box: StockYardsParkBoxRef.current,
-        img: StockYardsParkRef.current,
-        text: StockYardsParkTextRef.current,
-      },
-    };
-
     const AttractAnimIn = gsap.timeline({
-      paused: true,
       onComplete: () => {
         setIsClosing(false);
+        animateObjects();
       },
     });
     AttractAnimIn.fromTo(
@@ -317,41 +155,154 @@ export default function Attract(props) {
       { opacity: 1, duration: 1, ease: 'power2.inOut' }
     );
     AttractAnimIn.play();
+
+    return () => {
+      AttractAnimIn.kill();
+    };
   }, []);
 
-  useLayoutEffect(() => {
-    animateObjects();
-  }, []);
+  //Animation In for the Attract Screen
 
   const { page, setPage } = useContext(navigationContext);
-  const [attractObj, setAttractObj] = useState(tempAttractObj[1]);
-  const [isClosing, setIsClosing] = useState(false);
 
-  const AttractAnimOut = gsap.timeline({
-    paused: true,
-    onComplete: () => {
-      setIsClosing(true);
-      props.close();
-    },
-  });
-  AttractAnimOut.to(AttractRef, {
-    opacity: 0,
-    duration: 1,
-    ease: 'power2.inOut',
-  });
+  const [isClosing, setIsClosing] = useState(false);
 
   useEffect(() => {
     if (page !== 'Attract') {
+      const AttractAnimOut = gsap.timeline({
+        paused: true,
+        onComplete: () => {
+          setIsClosing(true);
+          props.close();
+        },
+      });
+      AttractAnimOut.to(AttractRef.current, {
+        opacity: 0,
+        duration: 1,
+        ease: 'power2.inOut',
+      });
       AttractAnimOut.play();
     }
   }, [page]);
+  const AttractBackgroundBoxRefs = useRef([]);
+  const AttractBoxRefs = useRef([]);
+  const AttractImageRefs = useRef([]);
+  const AttractTextRefs = useRef([]);
+
+  const tempArray = [
+    {
+      img: cowboys,
+      title: '1934 Sioux City Cowboys',
+    },
+    {
+      img: FMorganTaylor,
+      title: 'F. Morgan Taylor',
+    },
+    {
+      img: Gateway,
+      title: 'Gateway 2000 Soos',
+    },
+    {
+      img: GeorgeHowardLambert,
+      title: 'George Howard Lambert',
+    },
+    {
+      img: LaurenLeftyBarnes,
+      title: 'Lauren "Lefty" Barnes',
+    },
+    {
+      img: SiouxCityBreeze,
+      title: 'Sioux City Breeze',
+    },
+    {
+      img: SiouxCityCountryClub,
+      title: 'Sioux City Country Club',
+    },
+    {
+      img: SiouxCityMusketeers,
+      title: 'Sioux City Musketeers',
+    },
+    {
+      img: SiouxCityRedbirds,
+      title: 'Sioux City Redbirds',
+    },
+    {
+      img: SiouxCitySpeedway,
+      title: 'Sioux City Speedway',
+    },
+    {
+      img: SueJonesBerens,
+      title: 'Sue Jones Berens',
+    },
+    {
+      img: SoosPark,
+      title: 'Soos Park',
+    },
+    {
+      img: StockYardsPark,
+      title: 'Stock Yards Park',
+    },
+  ];
+
+  useEffect(() => {
+    const currentImageRefs = AttractImageRefs.current;
+    const handleLoad = (index) => {
+      AttractBoxRefs.current[index].style.width = `${
+        currentImageRefs[index].offsetWidth + 40
+      }px`;
+      gsap.set(currentImageRefs[index], { transformOrigin: 'left' });
+    };
+
+    currentImageRefs.forEach((ref, index) => {
+      if (ref.complete) {
+        handleLoad(index);
+      } else {
+        ref.addEventListener('load', () => handleLoad(index));
+      }
+    });
+
+    return () => {
+      currentImageRefs.forEach((ref, index) => {
+        if (ref) {
+          ref.removeEventListener('load', () => handleLoad(index));
+        }
+      });
+    };
+  }, []);
 
   return (
     <div id='Attract' ref={AttractRef} className={styles.Attract}>
       <div
         ref={AttractSequenceContRef}
         className={styles.AttractSequenceContainer}
-      ></div>
+      >
+        {tempArray.map((slide, i) => {
+          return (
+            <React.Fragment key={i}>
+              <div
+                rel={(el) => (AttractBackgroundBoxRefs.current[i] = el)}
+                className={styles.AttractBackgroundBox}
+              ></div>
+              <div
+                ref={(el) => (AttractBoxRefs.current[i] = el)}
+                className={styles.AttractBox}
+              ></div>
+              <img
+                ref={(el) => (AttractImageRefs.current[i] = el)}
+                className={styles.AttractImage}
+                src={slide.img}
+                alt=''
+              />
+              <p
+                ref={(el) => (AttractTextRefs.current[i] = el)}
+                className={styles.AttractText}
+              >
+                {slide.title}
+              </p>
+            </React.Fragment>
+          );
+        })}
+      </div>
 
       <div className={styles.attractGradient}></div>
       <p className={styles.TouchScreen}>TOUCH THE SCREEN TO START EXPLORING</p>
