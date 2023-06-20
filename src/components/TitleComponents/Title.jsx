@@ -22,6 +22,7 @@ export default function Title(props) {
   const [currentPage, setCurrentPage] = useState('Attract');
   const attractTitleRef = useRef(null);
   const helpRef = useRef(null);
+  const [showHelp, setShowHelp] = useState(false);
 
   useLayoutEffect(() => {
     gsap.fromTo(

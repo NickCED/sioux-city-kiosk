@@ -13,6 +13,9 @@ import ProfessionalSportsTimeline from './Timeline/ProfessionalSportsTimeline';
 export default function MainContent(props) {
   const { page, setPage } = useContext(navigationContext);
   const [state, setState] = useState(states[0]); //
+  const [attractOpen, setAttractOpen] = useState(true); // Attract screen state
+  const [homeOpen, setHomeOpen] = useState(false); // Home button state
+
   const style = {
     position: 'absolute',
     top: 0,
@@ -21,13 +24,37 @@ export default function MainContent(props) {
     height: '970px',
     backgroundColor: 'white', // Replace with your desired background color
   };
+  useEffect(() => {
+    switch (page) {
+      case 'Attract':
+        setAttractOpen(true);
+        break;
+      case 'Home':
+        setHomeOpen(true);
+        break;
+      default:
+        break;
+    }
+  }, [page]);
+
+  const close = (targetPage) => {
+    switch (targetPage) {
+      case 'Attract':
+        setAttractOpen(false);
+        break;
+      case 'Home':
+        setHomeOpen(false);
+        break;
+      default:
+    }
+  };
 
   return (
     <div style={style}>
       {/* <HOFNav /> */}
       {/* <HOFEntries /> */}
-      {page === 'Attract' && <Attract />}
-      {page === 'Home' && <Home />}
+      {attractOpen && <Attract close={() => close('Attract')} />}
+      {homeOpen && <Home close={() => close('Home')} />}
       {page === 'ProfessionalSportsMain' && <ProfessionalMain />}
       {page === 'ProfessionalSportsTimeline' && <ProfessionalSportsTimeline />}
     </div>

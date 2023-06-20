@@ -12,7 +12,7 @@ export const navigationContext = React.createContext('Attract');
 
 function App() {
   const [page, setPage] = React.useState('Attract');
-  const TimeoutSeconds = 50;
+  const TimeoutSeconds = 10;
   const inactivityTimeout = TimeoutSeconds * 1000;
   let inactivityTimer = null;
 

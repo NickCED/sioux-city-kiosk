@@ -1,4 +1,4 @@
-import { useRef, useLayoutEffect, useState } from 'react';
+import { useRef, useLayoutEffect, useState, useEffect } from 'react';
 import { gsap } from 'gsap';
 import { CSSRulePlugin } from 'gsap/all';
 
@@ -16,8 +16,10 @@ HelpButton.propTypes = {
 };
 
 export default function HelpButton(props) {
+  const buttonRef = useRef();
   const helpDialog = useRef();
   const [isOn, setIsOn] = useState(false);
+
   const handleHelpClick = (e) => {
     helpDialog.current.showModal();
     setIsOn(true);
@@ -28,13 +30,6 @@ export default function HelpButton(props) {
     );
   };
 
-  useLayoutEffect(() => {
-    gsap.fromTo(
-      helpDialog.current,
-      { opacity: 0 },
-      { opacity: 1, duration: 0.5 }
-    );
-  }, []);
   const clickModal = (e) => {
     const rect = helpDialog.current.getBoundingClientRect();
     if (
@@ -61,9 +56,14 @@ export default function HelpButton(props) {
     );
   };
 
+  useEffect(() => {
+    gsap.fromTo(`.${styles.help}`, { y: 100 }, { y: 0, duration: 1 });
+  }, []);
+
   return (
     <div id={props.id} className={styles.help}>
       <Button
+        ref={buttonRef}
         activeImage={active}
         defaultImage={inactive}
         style={{
@@ -94,7 +94,7 @@ export default function HelpButton(props) {
 
         <h5>
           If you have any questions or comments, please contact the Sioux City
-          Public Museum at 712-279-6174 or by email at
+          Public Museum at 712-279-6174 or by email at SCPM@sioux-city.org.
         </h5>
       </dialog>
     </div>

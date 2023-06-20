@@ -10,11 +10,10 @@
   position: absolute;
   bottom: 0px;
   right: 0px;
-
   transition: all 0.75s ease-in-out 0.55s;
   display: flex;
   align-items: center;
-  justify-content: end;
+  justify-content: flex-end;
   gap: 10px;
 }
 .Attract {

@@ -9,7 +9,7 @@
 
 #comingSoon {
   position: absolute;
-
+  opacity: 0;
   transform: translate(170%, -50%);
   color: white;
   font-size: 7rem;

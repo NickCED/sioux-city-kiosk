@@ -29,14 +29,61 @@ export default function Home(props) {
   const handleButtonClick = (e) => {
     // console.log(e.target.id);
     // setIsClosing(true);
-    // animOut(e.target.id);
   };
 
+  useEffect(() => {
+    if (page !== 'Home') {
+      homeAnimOut.play();
+    }
+  }, [page]);
+
+  const homeAnimOut = gsap.timeline({
+    paused: true,
+    onComplete: () => {
+      setIsClosing(false);
+      props.close();
+    },
+  });
+
+  homeAnimOut
+    .to(
+      [
+        '#HOFButton',
+        '#VenuesButton',
+        '#ProfessionalSportsButton',
+        '#SchoolsButton',
+        '#comingSoon',
+      ],
+      {
+        opacity: 0,
+        duration: 0.5,
+      }
+    )
+    .to(
+      ['#v1', '#v2', '#v3', '#h4', '#h5'],
+      {
+        duration: 1,
+        x: 1920,
+        ease: 'sine.inOut',
+      },
+      '-=0.5'
+    )
+    .to(
+      ['#h6'],
+      {
+        duration: 1,
+        x: 3370,
+        ease: 'sine.inOut',
+      },
+      '<'
+    );
   const animOut = (imgClicked) => {
     let clicked;
+    console.log(imgClicked);
     switch (imgClicked) {
       case 'HOF':
         clicked = 'HOFSearch';
+        homeAnimOut.play();
         break;
       case 'Venues':
         clicked = 'VenuesSearch';
@@ -50,46 +97,6 @@ export default function Home(props) {
       default:
         break;
     }
-
-    const homeAnimOut = gsap.timeline({
-      delay: 0.25,
-      onComplete: () => {
-        console.log('page changed', clicked);
-        setPage(clicked);
-        setIsClosing(false);
-      },
-    });
-    homeAnimOut
-      .to(
-        [
-          '#HOFButton',
-          '#VenuesButton',
-          '#ProfessionalSportsButton',
-          '#SchoolsButton',
-        ],
-        {
-          opacity: 0,
-          duration: 0.5,
-        }
-      )
-      .to(
-        ['#v1', '#v2', '#v3', '#h4', '#h5'],
-        {
-          duration: 1,
-          x: 1920,
-          ease: 'sine.inOut',
-        },
-        '-=0.5'
-      )
-      .to(
-        ['#h6'],
-        {
-          duration: 1,
-          x: 3370,
-          ease: 'sine.inOut',
-        },
-        '<'
-      );
   };
 
   useEffect(() => {
@@ -144,6 +151,7 @@ export default function Home(props) {
         '#VenuesButton',
         '#ProfessionalSportsButton',
         '#SchoolsButton',
+        '#comingSoon',
       ],
       {
         opacity: 0,
@@ -194,6 +202,7 @@ export default function Home(props) {
           '#SchoolsButton',
           '#VenuesButton',
           '#HOFButton',
+          '#comingSoon',
         ],
         { opacity: 0 },
         { opacity: 1, duration: 0.75, ease: 'sine.inOut', stagger: 0.25 },
