@@ -1,3 +1,46 @@
+  const cowboysBoxRef = useRef(null);
+  const cowboysRef = useRef(null);
+  const cowboysTextRef = useRef(null);
+  const FMorganTaylorBoxRef = useRef(null);
+  const FMorganTaylorRef = useRef(null);
+  const FMorganTaylorTextRef = useRef(null);
+  const GatewayboxRef = useRef(null);
+  const GatewayRef = useRef(null);
+  const GatewayTextRef = useRef(null);
+  const GeorgeHowardLambertBoxRef = useRef(null);
+  const GeorgeHowardLambertRef = useRef(null);
+  const GeorgeHowardLambertTextRef = useRef(null);
+  const LaurenLeftyBarnesBoxRef = useRef(null);
+  const LaurenLeftyBarnesRef = useRef(null);
+  const LaurenLeftyBarnesTextRef = useRef(null);
+  const SiouxCityBreezeBoxRef = useRef(null);
+  const SiouxCityBreezeRef = useRef(null);
+  const SiouxCityBreezeTextRef = useRef(null);
+  const SiouxCityCountryClubBoxRef = useRef(null);
+  const SiouxCityCountryClubRef = useRef(null);
+  const SiouxCityCountryClubTextRef = useRef(null);
+  const SiouxCityMusketeersBoxRef = useRef(null);
+  const SiouxCityMusketeersRef = useRef(null);
+  const SiouxCityMusketeersTextRef = useRef(null);
+  const SiouxCityRedbirdsBoxRef = useRef(null);
+  const SiouxCityRedbirdsRef = useRef(null);
+  const SiouxCityRedbirdsTextRef = useRef(null);
+  const SiouxCitySpeedwayBoxRef = useRef(null);
+  const SiouxCitySpeedwayRef = useRef(null);
+  const SiouxCitySpeedwayTextRef = useRef(null);
+  const SueJonesBerensBoxRef = useRef(null);
+  const SueJonesBerensRef = useRef(null);
+  const SueJonesBerensTextRef = useRef(null);
+  const SoosParkBoxRef = useRef(null);
+  const SoosParkRef = useRef(null);
+  const SoosParkTextRef = useRef(null);
+  const StockYardsParkBoxRef = useRef(null);
+  const StockYardsParkRef = useRef(null);
+  const StockYardsParkTextRef = useRef(null);
+
+
+
+
 <div
 id='cowboysBox'
 ref={cowboysBoxRef}
